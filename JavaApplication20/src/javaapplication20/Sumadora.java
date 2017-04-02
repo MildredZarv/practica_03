@@ -5,6 +5,8 @@
  */
 package javaapplication20;
 
+import javax.swing.JButton;
+
 public class Sumadora extends javax.swing.JFrame {
     private String signo;
     private Integer acumulador;
@@ -20,7 +22,7 @@ public class Sumadora extends javax.swing.JFrame {
     
     private void setdigito(String a){
         pantalla.setText(pantalla.getText()+a);
-    }
+    } 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -138,6 +140,16 @@ public class Sumadora extends javax.swing.JFrame {
         });
 
         ce.setText("C");
+        ce.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ceMouseClicked(evt);
+            }
+        });
+        ce.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ceActionPerformed(evt);
+            }
+        });
 
         cero.setText("0");
         cero.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +166,11 @@ public class Sumadora extends javax.swing.JFrame {
         });
 
         div.setText("/");
+        div.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                divActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -244,9 +261,31 @@ public class Sumadora extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+     private void resetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetMouseClicked
 
+        if (evt.getClickCount() == 2) {
+            pantalla.setText("");
+        } else {
+            pantalla.setText("" + 0);
+        }
+     }
+    
     private void igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_igualActionPerformed
-        pantalla.setText(acumulador.toString());
+        sumando2=Integer.parseInt(pantalla.getText());
+        JButton aux=(JButton)evt.getSource();
+        String signo=aux.getText();
+        System.out.println(signo);
+        switch (signo){
+            case "+": acumulador = acumulador + Integer.parseInt(pantalla.getText());
+                break;
+            case "-": acumulador = acumulador - Integer.parseInt(pantalla.getText());
+                break;
+            case "*": acumulador = acumulador * Integer.parseInt(pantalla.getText());
+                break;
+            case "/": acumulador = acumulador / Integer.parseInt(pantalla.getText());
+                break;
+        }
+        pantalla.setText(String.valueOf(acumulador));
     }//GEN-LAST:event_igualActionPerformed
 
     private void tresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tresActionPerformed
@@ -286,25 +325,17 @@ public class Sumadora extends javax.swing.JFrame {
     }//GEN-LAST:event_nueveActionPerformed
 
     private void masActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masActionPerformed
-        if(pantalla.getText().length()>0){
-        sumando2 =Integer.parseInt(pantalla.getText());
-        pantalla.setText(null);
-        sumando1=Integer.parseInt(pantalla.getText());
-        acumulador=acumulador+sumando2;
-        sumando1=0;
-        
-        }
+       acumulador=acumulador + Integer.parseInt(pantalla.getText());
+       signo="+";
+       pantalla.setText(null);
        
     }//GEN-LAST:event_masActionPerformed
-
+    
     private void menosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menosActionPerformed
-        if(pantalla.getText().length()>0){
-        sumando1=Integer.parseInt(pantalla.getText());
-        acumulador=acumulador-sumando1;
-        sumando1=0;
-        pantalla.setText(null);
-        signo="-";
-        }
+        System.out.println("acumulador: "+acumulador);
+        acumulador=acumulador - Integer.parseInt(pantalla.getText());
+       signo="-";
+       pantalla.setText(null);
     }//GEN-LAST:event_menosActionPerformed
 
     private void pantallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pantallaActionPerformed
@@ -312,17 +343,35 @@ public class Sumadora extends javax.swing.JFrame {
     }//GEN-LAST:event_pantallaActionPerformed
 
     private void multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multActionPerformed
-       if(pantalla.getText().length()>0){
-        sumando1=Integer.parseInt(pantalla.getText());
-        acumulador=acumulador*sumando1;
-        sumando1=0;
-        pantalla.setText(null);
-       }
+       acumulador=acumulador * Integer.parseInt(pantalla.getText());
+       signo="*";
+       pantalla.setText(null);
     }//GEN-LAST:event_multActionPerformed
 
     private void ceroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ceroActionPerformed
        setdigito("0");
     }//GEN-LAST:event_ceroActionPerformed
+
+    private void divActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divActionPerformed
+         acumulador=acumulador / Integer.parseInt(pantalla.getText());
+       signo="/";
+       pantalla.setText(null);
+    }//GEN-LAST:event_divActionPerformed
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ceActionPerformed(evt);
+     }
+      
+    private void ceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ceActionPerformed
+       
+    }//GEN-LAST:event_ceActionPerformed
+
+    private void ceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ceMouseClicked
+         if (2 == evt.getClickCount()) {
+             pantalla.setText("" + 0);
+         } else {
+             pantalla.setText("");
+         }
+    }//GEN-LAST:event_ceMouseClicked
 
     /**
      * @param args the command line arguments
