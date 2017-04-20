@@ -17,6 +17,7 @@ public class Persona {
     private Integer dia;
     private Integer mes;
     private Integer año;
+    private String comentario;
     
     
     public Persona(String n, String ec, String s, Integer año, Integer mes, Integer dia){
@@ -27,6 +28,19 @@ public class Persona {
         this.mes=mes;
         this.dia=dia;
         fechaNacimiento=dia+"/"+mes+"/"+"/"+año;
+    }
+    public Persona(){
+        
+    }
+    public Persona (String nombre, String coment){
+        this.nombre=nombre;
+        this.comentario=coment;
+    }
+    public void setComentario(String n){
+        comentario=n;
+    }
+    public String getComentario(){
+        return comentario;
     }
     
     public void setNombre(String n){
